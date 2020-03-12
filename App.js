@@ -1,12 +1,12 @@
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context'
-import Details from './src/screens/Details';
+import Promotion from './src/screens/Promotion';
 
 export default class App extends React.Component {
   render() {
     return (
       <SafeAreaProvider>
-        <Details/>
+        <Promotion/>
       </SafeAreaProvider>
     );
   }
