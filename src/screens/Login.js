@@ -30,9 +30,10 @@ export default class Login extends Component {
       })
   }
   login = () => {
-    this.setState({
+   /* this.setState({
         isLoading:true
-    })
+    })*/
+    this.props.navigation.navigate('Auth');
   }
   renderButtonLogin = () => {
     if (this.state.isLoading) {
@@ -53,9 +54,6 @@ export default class Login extends Component {
     const {showPass,identifiant,password,messageErreur} = this.state
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.titleContainer}>
-            <Text style={styles.title}>Connexion</Text>
-        </View>
         <View style={styles.inputContainer}>
             <Icons 
                 name='ios-person'
@@ -123,8 +121,8 @@ export default class Login extends Component {
         </TouchableOpacity>
         <View style={styles.btnSignup}>
             <Text>Pas de compte?</Text>
-            <TouchableOpacity>
-                <Text style={{color:Color.primary,fontWeight:'bold',paddingLeft:5}}>Inscription</Text>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Signup')} >
+                <Text style={{color:Color.primary,fontWeight:'bold',paddingLeft:5}}>S'inscrire</Text>
             </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -137,10 +135,6 @@ const styles = StyleSheet.create({
         flex:1,
         alignItems:'center',
         backgroundColor: '#fff',
-    },
-    titleContainer: {
-        margin:40,
-        justifyContent: 'center',
     },
     title: {
         color:'black',

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text,StyleSheet,ActivityIndicator,Image,TouchableOpacity } from 'react-native';
+import { View, Text,StyleSheet,ActivityIndicator,Image } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Email from '../components/Email';
 import Tel from '../components/Tel';

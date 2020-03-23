@@ -14,7 +14,7 @@ export default class Category extends Component {
         <View style={{flex:2}}>
             <Image
                 source={this.props.image}
-                style={{flex:1,width:null,height:null,resizeMode:'cover'}}
+                style={{flex:1,width:null,height:null,resizeMode:'contain'}}
             />
         </View>
         <View style={{flex:1,paddingLeft:10,paddingTop:10}}>

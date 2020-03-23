@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import {StyleSheet } from 'react-native';
+import {StyleSheet, View } from 'react-native';
 import CouponItem from '../components/CouponItem';
-import {SafeAreaView} from 'react-native-safe-area-context'
 
 export default class Coupons extends Component {
   constructor(props) {
@@ -12,12 +11,12 @@ export default class Coupons extends Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <CouponItem/>
         <CouponItem/>
         <CouponItem/>
         <CouponItem/>
-      </SafeAreaView>
+      </View>
     );
   }
 }

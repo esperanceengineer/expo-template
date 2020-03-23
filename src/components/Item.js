@@ -18,7 +18,7 @@ export default class Item extends Component {
 
   render() {
     return (
-      <TouchableOpacity style={styles.container}>
+      <TouchableOpacity style={styles.container} onPress={() => this.props.action()} >
         <Image
             style={styles.image}
             source={this.props.image}
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     image: {
         width:90,
         height:90,
-        resizeMode:'cover'
+        resizeMode:'contain'
     },
     content_container: {
         flex:1,

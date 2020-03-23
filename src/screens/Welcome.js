@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,Image,TextInput,Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet,Image,Dimensions, TouchableOpacity } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import Icons from '@expo/vector-icons/Ionicons';
 import Color from '../api/color'
 const {width} = Dimensions.get('window');
 
-export default class Index extends Component {
+export default class Welcome extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,6 +12,7 @@ export default class Index extends Component {
   }
 
   render() {
+    const {navigation} = this.props;
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.logoContainer}>
@@ -23,10 +23,10 @@ export default class Index extends Component {
             nouvelles promotions, vendues par le biais de notre application mobile
             </Text>
         </View>
-        <TouchableOpacity style={styles.btnLogin}>
+        <TouchableOpacity style={styles.btnLogin} onPress={() => navigation.navigate('Login')} >
             <Text style={styles.btnText}>Se connecter</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btnSignup}>
+        <TouchableOpacity style={styles.btnSignup} onPress={() => navigation.navigate('Signup')} >
             <Text style={[styles.btnText,{color:"black"}]}>S'inscrire</Text>
         </TouchableOpacity>
       </SafeAreaView>

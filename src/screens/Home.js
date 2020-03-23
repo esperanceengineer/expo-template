@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text,StyleSheet,ScrollView,TextInput } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {SearchBar} from 'react-native-elements';
+import { View, Text,StyleSheet,ScrollView } from 'react-native';
 import Category from '../components/Category';
-import Item from '../components/Item'
+import Item from '../components/Item';
 
 export default class Home extends Component {
   constructor(props) {
@@ -11,11 +9,14 @@ export default class Home extends Component {
     this.state = {
     };
   }
+  navigateTo = (title) => {
+    this.props.navigation.navigate('Details',{title})
+  }
   render() {
-    const {search} = this.state
+    const {navigation} = this.props;
     return (
-      <SafeAreaView style={styles.container}>
-        <View style={{height:100,marginTop:10}}>
+      <View style={styles.container}>
+        <View style={{height:100,marginVertical:10}}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <Category image={require('../assets/images/produits/1.png')} text="Téléphone"/>
             <Category image={require('../assets/images/produits/2.png')} text="Roue"/>
@@ -28,15 +29,22 @@ export default class Home extends Component {
         <ScrollView style={{backgroundColor:'#eeeeee'}}>
           <Item 
           image={require('../assets/images/produits/1.png')} 
-          title="Produit" vote={4} author = "lormemmm" prix="1000F" saving="10"/>
+          title="Produit" vote={4} author = "lormemmm" 
+          prix="1000F" saving="10" action={() => this.navigateTo('Produit')} />
           <Item 
           image={require('../assets/images/produits/2.png')} 
-          title="Roue" vote={3} author = "Espérance" prix="3000F" saving="20"/>
+          title="Roue" vote={3} author = "Espérance" 
+          prix="3000F" saving="20" action={() => this.navigateTo('Roue')} />
           <Item 
           image={require('../assets/images/produits/3.png')} 
-          title="Savon" vote={3.5} author = "Alladoum" prix="5000F" saving="10"/>
+          title="Savon" vote={3.5} author = "Alladoum" 
+          prix="5000F" saving="10" action={() => this.navigateTo('Savon')}/>
+          <Item 
+          image={require('../assets/images/produits/11.jpg')} 
+          title="PC" vote={3.5} author = "Alladoum" 
+          prix="5000F" saving="10" action={() => this.navigateTo('Voiture')} />
         </ScrollView>
-      </SafeAreaView>
+      </View>
     );
   }
 }

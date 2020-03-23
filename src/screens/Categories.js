@@ -61,6 +61,6 @@ const styles = StyleSheet.create({
         marginTop: 20,
         flexDirection:'row',
         justifyContent:'space-evenly',
-        flexWrap:'wrap'
+        flexWrap:'wrap',
     }
 })

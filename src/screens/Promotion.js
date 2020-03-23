@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet,TouchableOpacity,Dimensions, ActivityIndicator,Picker } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {Input,Avatar} from 'react-native-elements';
 import * as ImagePicker from 'expo-image-picker';
 import colors from '../api/color';
@@ -77,7 +76,7 @@ export default class
   render() {
     const {categorie,prix,pourcentage,produit,description,messageErreur,images} = this.state;
     return (
-      <SafeAreaView style={styles.container} >
+      <View style={styles.container} >
       <Input
         placeholder="Produit"
         errorStyle={{color:'red'}}
@@ -151,7 +150,7 @@ export default class
         <TouchableOpacity style={styles.btnValider} >
             {this.renderButton()}
         </TouchableOpacity>
-      </SafeAreaView>
+      </View>
     );
   }
 }

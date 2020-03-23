@@ -19,7 +19,7 @@ export default class Signup extends Component {
         sexe:'masculin',
         tel:'',
         email:'',
-        photo:'',
+        photo:null,
         isLoading:false,
         showPass:false,
         loading:false,
@@ -49,7 +49,7 @@ export default class Signup extends Component {
     let continued = true;
     let pickerResult;
     if(isConnected) {
-        if(this.state.photo != '') return;
+        if(this.state.photo != null) return;
         this.setState({loading:true});
         let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
         try {
@@ -92,10 +92,6 @@ export default class Signup extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView>
-
-            <View style={styles.titleContainer}>
-                <Text style={styles.title}>Inscription</Text>
-            </View>
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.input}
@@ -220,8 +216,8 @@ export default class Signup extends Component {
             </TouchableOpacity>
             <View style={styles.btnSignup}>
                 <Text>Déjà un compte?</Text>
-                <TouchableOpacity>
-                    <Text style={{color:Color.primary,fontWeight:'bold',paddingLeft:5}}>Connexion</Text>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} >
+                    <Text style={{color:Color.primary,fontWeight:'bold',paddingLeft:5}}>Se connecter</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
@@ -234,10 +230,6 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor: '#fff',
-    },
-    titleContainer: {
-        margin:20,
-        justifyContent: 'center',
     },
     title: {
         color:'black',
@@ -303,6 +295,6 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent: 'center',
         alignItems: 'flex-end',
-        marginTop:3,
+        marginVertical:3,
     }
 })

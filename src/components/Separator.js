@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         flex:8,
         flexDirection: 'row',
         borderColor: colors.primary,
-        borderWidth: 1,
+        borderWidth: 0.4,
         opacity: 0.4,
     }
 })
