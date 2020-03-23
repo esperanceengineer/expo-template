@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View,Image } from 'react-native';
+import { Text, View,Image,Share,Platform } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -68,7 +68,20 @@ function HomeStackScreen({navigation}) {
                     onPress={() => navigation.navigate('Promotion')} />)
                     }} />
             <HomeStack.Screen name ='Details' component ={DetailsScreen} 
-            options={({route}) => ({title:route.params.title})} />
+            options={({route}) => ({
+                title:route.params.title,
+                headerRight: () => {
+                    if (Platform.OS === 'ios') {
+                        return(
+                        <Ionicons 
+                        style={{paddingRight:10}} 
+                        name='ios-share' size={30} color={colors.primary} 
+                        onPress={() => Share.share(
+                            {title: 'Produit',message: 'vente de produits it-corp'})} />
+                        )
+                    }
+                    }
+                })} />
             <HomeStack.Screen name ='Promotion' component ={PromotionScreen}/>
         </HomeStack.Navigator>
 

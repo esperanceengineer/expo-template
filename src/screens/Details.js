@@ -4,14 +4,67 @@ import {
   View,
   Image,
   Dimensions,
-  StyleSheet
+  StyleSheet, 
+  TouchableOpacity, 
+  Share, 
+  Platform, 
+  ActivityIndicator
 } from 'react-native'
 import Swiper from 'react-native-swiper';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {Ionicons} from '@expo/vector-icons';
+import {Rating} from 'react-native-elements';
 import colors from '../api/color';
 const { width } = Dimensions.get('window');
 
 export default class Details extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      favorite:false,
+      loading:false
+    }
+  }
+  onLike = () => {
+    this.setState(prevState => ({
+      favorite: !prevState.favorite
+    }))
+  }
+  onShare = () => {
+    Share.share({title:'produit',message: 'Vente de produit chez it-corp'});
+  }
+  displayShareActionButton = () => {
+    if (Platform.OS === 'android') {
+      return (
+        <TouchableOpacity onPress={this.onShare} style={styles.shareButton} >
+              <Ionicons
+                name='md-share'
+                color={colors.primary}
+                size={30}
+              />
+        </TouchableOpacity>
+
+      )
+    }
+  }
+  displayLoading = () => {
+    if (this.state.loading) {
+      return (
+        <ActivityIndicator color={colors.primary} size='large' style={styles.loading} />
+      )
+    }
+  }
+  displayLikeIcon = () => {
+    const {favorite} = this.state;
+    return (
+      <Ionicons
+              name={favorite==true?'ios-heart':'ios-heart-empty'}
+              color={colors.primary}
+              size={favorite==true?40:30}
+              onPress={this.onLike}
+        />
+    )
+  }
   render () {
     return (
       <SafeAreaView style={styles.container}>
@@ -45,9 +98,34 @@ export default class Details extends Component {
           </Swiper>
         </View>
 
-        <View>
-          <Text>Espérance</Text>
+        <View style={styles.contentContainer}>
+          <Text style={styles.contentTitle} >Titre</Text>
+          <TouchableOpacity style={styles.favoriteIcon} >
+            {this.displayLikeIcon()}
+          </TouchableOpacity>
+          <Text style={styles.overView}>
+          It was popularised in the 1960s with the release of Letraset 
+          sheets containing Lorem Ipsum passages, and more recently 
+          with desktop publishing software like Aldus PageMaker 
+          including versions of Lorem Ipsum
+          </Text>
+          <Text>Partenaire : IT-CORP</Text>
+          <Text>Prix :500 FCFA</Text>
+          <Text>Nombre de vues: 500</Text>
+          <Text>Sorti le : 23/03/2020</Text>
+          <View style={{flex:1,flexDirection:'row'}}>
+            <Text>Note:</Text>
+            <Rating
+                type="custom"
+                ratingColor={colors.primary}
+                imageSize={15}
+                startingValue={3}
+                style={{marginLeft:10}}
+            />
+          </View>
         </View>
+        {this.displayShareActionButton()}
+        {this.displayLoading()}
       </SafeAreaView>
     )
   }
@@ -55,7 +133,8 @@ export default class Details extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor:'#fff'
   },
 
   wrapper: {
@@ -68,5 +147,44 @@ const styles = StyleSheet.create({
   image: {
     width,
     flex:1
+  },
+  contentContainer: {
+    flex:1,
+    marginLeft:5
+  },
+  contentTitle: {
+    fontWeight:'bold',
+    fontSize:30,
+    flexWrap:'wrap',
+    marginHorizontal:5,
+    marginVertical:5,
+    color:'#000000',
+    textAlign:'center'
+  },
+  favoriteIcon: {
+    alignItems: 'center'
+  },
+  overView: {
+    fontStyle:'italic',
+    color:'#666666',
+    margin:5,
+  },
+  shareButton: {
+    position:'absolute',
+    width:60,
+    height:60,
+    right:30,
+    bottom:30,
+    borderRadius:30,
+    backgroundColor:'#eee',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  loading: {
+    position:'absolute',
+    left:0,
+    right:0,
+    top:0,
+    bottom:0
   }
 });
