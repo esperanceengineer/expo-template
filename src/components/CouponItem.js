@@ -13,7 +13,9 @@ export default class CouponItem extends Component {
 
   render() {
     return (
-    <TouchableOpacity style={{backgroundColor:'#fff',flexDirection:'row',marginBottom:5,justifyContent:'space-evenly',padding:5}} >
+    <TouchableOpacity key={this.props.index} style={{
+      backgroundColor:'#fff',flexDirection:'row',
+      marginBottom:5,justifyContent:'space-evenly',padding:5}} >
         <Icons 
             name="qrcode"
             size={90}

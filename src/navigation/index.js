@@ -20,6 +20,7 @@ import DetailsScreen from '../screens/Details';
 import SearchScreen from '../screens/Search';
 import ProfileScreen from '../screens/Profil';
 import PromotionScreen from '../screens/Promotion';
+import PromotionsScreen from '../screens/Promotions';
 
 
 /*
@@ -98,12 +99,17 @@ function CategoryStackScreen({navigation}) {
                 color:colors.primary
             },
             headerTintColor:colors.primary,
-            headerLeft: () => (<Ionicons 
-            style={{paddingLeft:10}} 
-            name='ios-menu' size={30} color={colors.primary} 
-            onPress={()=>navigation.openDrawer()} />),
         }} >
-            <CategoryStack.Screen name='Category' component={CategoryScreen} options={{title:'Catégories'}} />
+            <CategoryStack.Screen name='Category' component={CategoryScreen} options={{
+                title:'Catégories',
+                headerLeft: () => (<Ionicons 
+                    style={{paddingLeft:10}} 
+                    name='ios-menu' size={30} color={colors.primary} 
+                    onPress={()=>navigation.openDrawer()} />),
+                }} />
+            <CategoryStack.Screen name='Promotions' component={PromotionsScreen} options={({route}) => ({
+                title:route.params.title
+            })} />
         </CategoryStack.Navigator>
     )
 }

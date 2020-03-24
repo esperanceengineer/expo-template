@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,TouchableOpacity,Dimensions, ActivityIndicator,Picker } from 'react-native';
+import { View, Text, StyleSheet,TouchableOpacity,Dimensions, ActivityIndicator,Picker, Animated } from 'react-native';
 import {Input,Avatar} from 'react-native-elements';
 import * as ImagePicker from 'expo-image-picker';
 import colors from '../api/color';
@@ -21,8 +21,15 @@ export default class
         messageErreur: {
             type:'',
             message:''
-        }
+        },
+        pan: new Animated.Value(-100)
     };
+  }
+  componentDidMount() {
+    Animated.spring(this.state.pan,{
+      toValue:0,
+      useNativeDriver:true
+    }).start();
   }
   onChangeText = (type,val) => {
       this.setState({
@@ -76,7 +83,7 @@ export default class
   render() {
     const {categorie,prix,pourcentage,produit,description,messageErreur,images} = this.state;
     return (
-      <View style={styles.container} >
+      <Animated.View style={[styles.container,{transform:[{translateY:this.state.pan}]}]} >
       <Input
         placeholder="Produit"
         errorStyle={{color:'red'}}
@@ -150,7 +157,8 @@ export default class
         <TouchableOpacity style={styles.btnValider} >
             {this.renderButton()}
         </TouchableOpacity>
-      </View>
+
+      </Animated.View>
     );
   }
 }

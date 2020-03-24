@@ -3,6 +3,16 @@ import { View, Text, StyleSheet,Image, TouchableOpacity } from 'react-native';
 import {Rating} from 'react-native-elements';
 import colors from '../api/color';
 
+/**
+ * @param
+ * @function action
+ * @property image
+ * @property integer prix
+ * @property integer vote
+ * @property integer saving
+ * @property string title
+ * @property string author
+ */
 export default class Item extends Component {
   constructor(props) {
     super(props);

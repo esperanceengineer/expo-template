@@ -8,10 +8,9 @@ import {
   TouchableOpacity, 
   Share, 
   Platform, 
-  ActivityIndicator
+  ActivityIndicator, Animated
 } from 'react-native'
 import Swiper from 'react-native-swiper';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {Ionicons} from '@expo/vector-icons';
 import {Rating} from 'react-native-elements';
 import colors from '../api/color';
@@ -22,8 +21,15 @@ export default class Details extends Component {
     super(props);
     this.state = {
       favorite:false,
-      loading:false
+      loading:false,
+      pan: new Animated.ValueXY({y:200,x:-150}),
     }
+  }
+  componentDidMount() {
+    Animated.spring(this.state.pan,{
+      toValue:{y:0,x:0},
+      useNativeDriver:true
+    }).start();
   }
   onLike = () => {
     this.setState(prevState => ({
@@ -67,7 +73,7 @@ export default class Details extends Component {
   }
   render () {
     return (
-      <SafeAreaView style={styles.container}>
+      <Animated.ScrollView style={[styles.container,{transform:this.state.pan.getTranslateTransform()}]}>
         <View style={{height:200}}>
           <Swiper style={styles.wrapper}
             dot={<View style={{backgroundColor: 'rgba(255,255,255,.3)', width: 10, height: 10, borderRadius: 5, marginLeft: 5, marginRight: 5}} />}
@@ -126,7 +132,7 @@ export default class Details extends Component {
         </View>
         {this.displayShareActionButton()}
         {this.displayLoading()}
-      </SafeAreaView>
+      </Animated.ScrollView>
     )
   }
 }
@@ -174,7 +180,7 @@ const styles = StyleSheet.create({
     width:60,
     height:60,
     right:30,
-    bottom:30,
+    bottom:0,
     borderRadius:30,
     backgroundColor:'#eee',
     justifyContent:'center',
@@ -184,7 +190,9 @@ const styles = StyleSheet.create({
     position:'absolute',
     left:0,
     right:0,
-    top:0,
-    bottom:0
+    top:100,
+    bottom:0,
+    justifyContent:'center',
+    alignItems: 'center',
   }
 });
