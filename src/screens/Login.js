@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,TextInput,Dimensions, TouchableOpacity,ActivityIndicator } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import { View, Text, StyleSheet,TextInput,Dimensions, TouchableOpacity,ActivityIndicator,Animated } from 'react-native';
 import Icons from '@expo/vector-icons/Ionicons';
+import {connect} from 'react-redux';
 import colors from '../api/color';
 const {width} = Dimensions.get('window');
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,8 +13,16 @@ export default class Login extends Component {
         password:'',
         isLoading:false,
         showPass:false,
-        messageErreur:''
+        messageErreur:'',
+        pan: new Animated.Value(-100)
     };
+  }
+  componentDidMount() {
+      Animated.spring(this.state.pan,{
+          toValue:0,
+          useNativeDriver:true,
+          delay:100
+      }).start();
   }
 
   onChangeText = (key,value) => {
@@ -52,7 +60,7 @@ export default class Login extends Component {
   render() {
     const {showPass,identifiant,password,messageErreur} = this.state
     return (
-      <SafeAreaView style={styles.container}>
+      <Animated.View style={[styles.container,{transform:[{translateY:this.state.pan}]}]}>
         <View style={styles.inputContainer}>
             <Icons 
                 name='ios-person'
@@ -124,7 +132,7 @@ export default class Login extends Component {
                 <Text style={{color:colors.primary,fontWeight:'bold',paddingLeft:5}}>S'inscrire</Text>
             </TouchableOpacity>
         </View>
-      </SafeAreaView>
+      </Animated.View>
     );
   }
 }
@@ -195,3 +203,5 @@ const styles = StyleSheet.create({
         margin: 10,
     }
 })
+
+export default connect()(Login);

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {StyleSheet, View } from 'react-native';
+import {connect} from 'react-redux';
 import CouponItem from '../components/CouponItem';
 import AnimatedItem from '../components/AnimatedItem';
 
 
-export default class Coupons extends Component {
+class Coupons extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +14,6 @@ export default class Coupons extends Component {
   }
 
   render() {
-    console.log(this.state.coupons)
     return (
       <View style={styles.container}>
         {
@@ -34,3 +34,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#eee',
     }
 })
+const mapStateToProps = state => ({
+  coupons: state.coupons,
+  user:state.user
+})
+export default connect(mapStateToProps)(Coupons);

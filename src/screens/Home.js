@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { View,StyleSheet,ScrollView,TouchableOpacity, Animated ,Text} from 'react-native';
+import {connect} from 'react-redux';
 import Category from '../components/Category';
 import ListItem from '../containers/ListItem';
 import colors from '../api/color';
 
-export default class Home extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -125,3 +126,10 @@ const styles = StyleSheet.create({
       color:colors.primary
     }
 })
+
+const maStateToProps = (state) => ({
+  promotions: state.promotions,
+  partenaires:state.partenaires,
+  user:state.user
+})
+export default connect(maStateToProps)(Home);

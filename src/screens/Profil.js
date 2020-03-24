@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text,StyleSheet,ActivityIndicator,Image } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {connect} from 'react-redux';
 import Email from '../components/Email';
 import Tel from '../components/Tel';
 import Separator from '../components/Separator';
 import Signout from '../components/Signout';
 import colors from '../api/color';
 
-export default class Profil extends Component {
+class Profil extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,7 +36,7 @@ export default class Profil extends Component {
   }
 
   render() {
-      const {logoUrl} = this.state
+      const {logoUrl} = this.state;
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.contentImage}>
@@ -91,3 +92,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
       },
 })
+
+const mapStateToProps = state => ({
+  user:state.user
+})
+export default connect(mapStateToProps)(Profil);

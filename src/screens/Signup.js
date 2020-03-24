@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet,TextInput,Dimensions, TouchableOpacity,ActivityIndicator,Picker,ScrollView } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import Icons from '@expo/vector-icons/Ionicons';
 import {Avatar,Image} from 'react-native-elements';
 import NetInfo from '@react-native-community/netinfo';

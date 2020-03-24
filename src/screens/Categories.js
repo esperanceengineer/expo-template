@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {StyleSheet,TouchableOpacity ,ScrollView, Animated} from 'react-native';
-import CategoryItem from '../components/CategoryItem'
+import {StyleSheet,TouchableOpacity, Animated,ScrollView} from 'react-native';
+import {connect} from 'react-redux';
+import CategoryItem from '../components/CategoryItem';
 
-export default class Categories extends Component {
+class Categories extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -93,12 +94,14 @@ export default class Categories extends Component {
   render() {
     const {categories} = this.state;
     return (
-      <Animated.ScrollView style={{transform:[{translateX:this.state.pan}]}} contentContainerStyle={styles.container}>
-      {categories.map((category,index) => 
-      (<TouchableOpacity key={index} onPress={() => this.navigateTo(category.title)} >
-        <CategoryItem category={category}/>
-      </TouchableOpacity>))}
-      </Animated.ScrollView>
+      <Animated.View style={{flex:1,transform:[{translateX:this.state.pan}]}}>
+        <ScrollView contentContainerStyle={styles.container}>
+            {categories.map((category,index) => 
+            (<TouchableOpacity key={index} onPress={() => this.navigateTo(category.title)} >
+              <CategoryItem category={category}/>
+            </TouchableOpacity>))}
+        </ScrollView>
+      </Animated.View>
     );
   }
 }
@@ -113,3 +116,11 @@ const styles = StyleSheet.create({
         flexWrap:'wrap',
     }
 })
+
+const mapStateToProps = (state) => ({
+  categories:state.categories,
+  promotions:state.promotions,
+  user:state.user
+})
+
+export default connect(mapStateToProps)(Categories);

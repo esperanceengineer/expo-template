@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {SearchBar} from 'react-native-elements';
+import {connect} from 'react-redux';
 import ListItem from '../containers/ListItem';
 
-export default class Search extends Component {
+class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -79,3 +80,9 @@ export default class Search extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  promotions: state.promotions
+})
+
+export default connect(mapStateToProps)(Search);
