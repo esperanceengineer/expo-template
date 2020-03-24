@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View,Image,Share,Platform } from 'react-native';
+import {View,Image,Share,Platform } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -21,6 +21,7 @@ import SearchScreen from '../screens/Search';
 import ProfileScreen from '../screens/Profil';
 import PromotionScreen from '../screens/Promotion';
 import PromotionsScreen from '../screens/Promotions';
+import NotificationScreen from '../screens/Notification';
 
 
 /*
@@ -63,10 +64,17 @@ function HomeStackScreen({navigation}) {
                     style={{paddingLeft:10}} 
                     name='ios-menu' size={30} color={colors.primary} 
                     onPress={()=>navigation.openDrawer()} />),
-                headerRight: () => (<Ionicons 
+                headerRight: () => 
+                (<View style={{flexDirection:'row'}}>
+                    <Ionicons 
+                    style={{paddingRight:10}} 
+                    name='ios-notifications' size={30} color={colors.primary} 
+                    onPress={() => navigation.navigate('Notification')} />
+                    <Ionicons 
                     style={{paddingRight:10}} 
                     name='ios-send' size={30} color={colors.primary} 
-                    onPress={() => navigation.navigate('Promotion')} />)
+                    onPress={() => navigation.navigate('Promotion')} />
+                </View>)
                     }} />
             <HomeStack.Screen name ='Details' component ={DetailsScreen} 
             options={({route}) => ({
@@ -84,6 +92,7 @@ function HomeStackScreen({navigation}) {
                     }
                 })} />
             <HomeStack.Screen name ='Promotion' component ={PromotionScreen}/>
+            <HomeStack.Screen name ='Notification' component ={NotificationScreen}/>
         </HomeStack.Navigator>
 
     )
@@ -158,6 +167,14 @@ function TabNavigatorScreen({navigation}) {
         })}  tabBarOptions = {{
             activeTintColor: colors.primary,
             inactiveTintColor: 'gray',
+            style:{
+                backgroundColor:'white',
+                borderTopWidth:0,
+                shadowOffset:{width:5,height:3},
+                shadowColor:'black',
+                shadowOpacity:0.5,
+                elevation:5
+            }
         }} >
             <TabNavigator.Screen name='Home' component={HomeStackScreen} options={{title:'Accueil'}} />
             <TabNavigator.Screen  name='Category' component={CategoryStackScreen} options={{title:'Catégories'}}/>

@@ -6,7 +6,7 @@ import {Avatar,Image} from 'react-native-elements';
 import NetInfo from '@react-native-community/netinfo';
 import * as ImagePicker from 'expo-image-picker';
 import Useful from '../api/useful';
-import Color from '../api/color';
+import colors from '../api/color';
 const {width} = Dimensions.get('window');
 
 export default class Signup extends Component {
@@ -34,15 +34,15 @@ export default class Signup extends Component {
       })
   }
   showPassword = () => {
-      let {showPass} = this.state;
-      this.setState({
-          showPass:!showPass,
-      })
+      this.setState(prevState =>({
+          showPass:!prevState.showPass,
+      }))
   }
-  login = () => {
+  onSignup = () => {
     this.setState({
         isLoading:true
     })
+    this.props.navigation.navigate('Login');
   }
   uploadImage = async () => {
     let isConnected = await NetInfo.isConnected.fetch();
@@ -90,8 +90,7 @@ export default class Signup extends Component {
   render() {
     const {showPass,identifiant,password,messageErreur,all,tel,email,photo,sexe} = this.state
     return (
-      <SafeAreaView style={styles.container}>
-        <ScrollView>
+        <ScrollView style={styles.container}>
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.input}
@@ -140,7 +139,7 @@ export default class Signup extends Component {
                     <Icons 
                         name={showPass?'ios-eye':'ios-eye-off'}
                         size={28}
-                        color={Color.primary}
+                        color={colors.primary}
                     />
                 </TouchableOpacity>
             </View>
@@ -211,17 +210,16 @@ export default class Signup extends Component {
                         </View>
                         )
                     }
-            <TouchableOpacity style={styles.btnLogin} onPress={this.login}>
+            <TouchableOpacity style={styles.btnLogin} onPress={this.onSignup}>
                 {this.renderButtonLogin()}
             </TouchableOpacity>
             <View style={styles.btnSignup}>
                 <Text>Déjà un compte?</Text>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} >
-                    <Text style={{color:Color.primary,fontWeight:'bold',paddingLeft:5}}>Se connecter</Text>
+                    <Text style={{color:colors.primary,fontWeight:'bold',paddingLeft:5}}>Se connecter</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
-      </SafeAreaView>
     );
   }
 }
@@ -249,7 +247,7 @@ const styles = StyleSheet.create({
         color:'black',
         marginHorizontal:25,
         borderWidth: 1,
-        borderColor: Color.primary,
+        borderColor: colors.primary,
         marginBottom: 10,
     },
     btnEye: {
@@ -281,7 +279,7 @@ const styles = StyleSheet.create({
         height:45,
         borderRadius:25,
         marginVertical:10,
-        backgroundColor:Color.primary,
+        backgroundColor:colors.primary,
         justifyContent: 'center',
         marginLeft: 60,
     },

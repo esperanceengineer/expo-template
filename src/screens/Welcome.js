@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet,Image,Dimensions, TouchableOpacity } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import Color from '../api/color'
+import colors from '../api/color';
 const {width} = Dimensions.get('window');
 
 export default class Welcome extends Component {
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         margin:50,
     },
     logoText: {
-        color:'black',
+        color:colors.primary,
         fontSize:20,
         fontWeight:'bold',
         marginTop:10,
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         height:45,
         borderRadius:25,
         marginTop:10,
-        backgroundColor:Color.primary,
+        backgroundColor:colors.primary,
         justifyContent: 'center',
     },
     btnSignup: {
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
       marginTop:20,
       justifyContent: 'center',
       borderWidth: 1,
-      borderColor: Color.primary,
+      borderColor: colors.primary,
   },
     btnText: {
         color:'#fff',

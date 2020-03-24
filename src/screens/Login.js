@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,Image,TextInput,Dimensions, TouchableOpacity,ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet,TextInput,Dimensions, TouchableOpacity,ActivityIndicator } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Icons from '@expo/vector-icons/Ionicons';
-import Color from '../api/color'
+import colors from '../api/color';
 const {width} = Dimensions.get('window');
 
 export default class Login extends Component {
@@ -24,16 +24,15 @@ export default class Login extends Component {
       })
   }
   showPassword = () => {
-      let {showPass} = this.state;
-      this.setState({
-          showPass:!showPass,
-      })
+      this.setState(prevState => ({
+          showPass:!prevState.showPass,
+      }))
   }
   login = () => {
    /* this.setState({
         isLoading:true
     })*/
-    this.props.navigation.navigate('Auth');
+    this.props.navigation.navigate('Auth',{screen:'Home'});
   }
   renderButtonLogin = () => {
     if (this.state.isLoading) {
@@ -58,7 +57,7 @@ export default class Login extends Component {
             <Icons 
                 name='ios-person'
                 size={28}
-                color = {Color.primary}
+                color = {colors.primary}
                 style = {styles.inputIcon}
             />
             <TextInput
@@ -78,7 +77,7 @@ export default class Login extends Component {
             <Icons 
                 name='ios-lock'
                 size={28}
-                color = {Color.primary}
+                color = {colors.primary}
                 style = {styles.inputIcon}
             />
             <TextInput
@@ -99,7 +98,7 @@ export default class Login extends Component {
                 <Icons 
                     name={showPass?'ios-eye':'ios-eye-off'}
                     size={28}
-                    color={Color.primary}
+                    color={colors.primary}
                 />
             </TouchableOpacity>
         </View>
@@ -122,7 +121,7 @@ export default class Login extends Component {
         <View style={styles.btnSignup}>
             <Text>Pas de compte?</Text>
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Signup')} >
-                <Text style={{color:Color.primary,fontWeight:'bold',paddingLeft:5}}>S'inscrire</Text>
+                <Text style={{color:colors.primary,fontWeight:'bold',paddingLeft:5}}>S'inscrire</Text>
             </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -154,7 +153,7 @@ const styles = StyleSheet.create({
         color:'black',
         marginHorizontal:25,
         borderWidth: 1,
-        borderColor: Color.primary,
+        borderColor: colors.primary,
         marginBottom: 10,
     },
     inputIcon: {
@@ -172,7 +171,7 @@ const styles = StyleSheet.create({
         height:45,
         borderRadius:25,
         marginVertical:10,
-        backgroundColor:Color.primary,
+        backgroundColor:colors.primary,
         justifyContent: 'center',
     },
     btnGle: {
@@ -180,7 +179,7 @@ const styles = StyleSheet.create({
         height:45,
         borderRadius:25,
         marginTop:10,
-        backgroundColor:Color.secondary,
+        backgroundColor:colors.secondary,
         justifyContent: 'center',
     },
     btnText: {

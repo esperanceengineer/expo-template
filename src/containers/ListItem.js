@@ -49,7 +49,7 @@ export default class ListItem extends Component {
                 <Item 
                 image={item.image} 
                 title={item.title} vote={item.vote} author = {item.author} 
-                prix={item.prix} saving={item.saving} 
+                prix={item.prix} saving={item.saving} date={item.date}
                 action={() => this.navigateTo(item.title)} />
             </AnimatedItem>
         )

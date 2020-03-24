@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View,StyleSheet,ScrollView,TouchableOpacity, Animated ,Easing} from 'react-native';
+import { View,StyleSheet,ScrollView,TouchableOpacity, Animated ,Text} from 'react-native';
 import Category from '../components/Category';
 import ListItem from '../containers/ListItem';
+import colors from '../api/color';
 
 export default class Home extends Component {
   constructor(props) {
@@ -33,30 +34,34 @@ export default class Home extends Component {
         {
           title:'Produit',
           author:'loremimsumm',
-          vote:4,saving:10,
+          vote:4,saving:'2000F',
           image:require('../assets/images/produits/1.png'),
-          prix:'1000F'
+          prix:'1000F',
+          date: '2020-03-23'
         },
         {
           title:'Roue',
           author:'Espérance',
-          vote:3,saving:20,
+          vote:3,saving:'4000F',
           image:require('../assets/images/produits/2.png'),
-          prix:'3000F'
+          prix:'3000F',
+          date: '2020-03-23'
         },
         {
           title:'Savon',
           author:'Alladoum',
-          vote:3.5,saving:10,
+          vote:3.5,saving:'7000F',
           image:require('../assets/images/produits/3.png'),
-          prix:'5000F'
+          prix:'5000F',
+          date: '2020-03-22'
         },
         {
           title:'Iphone',
           author:'Ndouba',
-          vote:4,saving:10,
+          vote:4,saving:'15000F',
           image:require('../assets/images/produits/11.jpg'),
-          prix:'10000F'
+          prix:'10000F',
+          date: '2020-03-22'
         }
       ],
       loading:false,
@@ -93,6 +98,9 @@ export default class Home extends Component {
             </TouchableOpacity>))}
           </ScrollView>
         </View>
+        <View style={{marginBottom:5}} >
+          <Text style={styles.header}>Nouvelles Promotions</Text>
+        </View>
         <ListItem
           onReload={this.onReload}
           navigation={this.props.navigation}
@@ -109,5 +117,11 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor: '#fff',
+    },
+    header: {
+      fontWeight:'700',
+      fontSize:20,
+      paddingLeft:5,
+      color:colors.primary
     }
 })

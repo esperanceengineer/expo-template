@@ -13,8 +13,11 @@ import {
 import Swiper from 'react-native-swiper';
 import {Ionicons} from '@expo/vector-icons';
 import {Rating} from 'react-native-elements';
+import moment from 'moment';
+import 'moment/locale/fr';
 import colors from '../api/color';
 const { width } = Dimensions.get('window');
+moment.locale('fr');
 
 export default class Details extends Component {
   constructor(props) {
@@ -118,7 +121,7 @@ export default class Details extends Component {
           <Text>Partenaire : IT-CORP</Text>
           <Text>Prix :500 FCFA</Text>
           <Text>Nombre de vues: 500</Text>
-          <Text>Sorti le : 23/03/2020</Text>
+          <Text>Publiée: {moment('2020-03-23').fromNow()}</Text>
           <View style={{flex:1,flexDirection:'row'}}>
             <Text>Note:</Text>
             <Rating

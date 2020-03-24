@@ -35,11 +35,15 @@ export default class Item extends Component {
         />
         <View style={styles.content_container}>
             <Text style={{fontWeight:'bold'}}>{this.props.title}</Text>
-            <Text style={{fontSize:11,color:'grey'}} >{this.props.author}</Text>
+            <Text style={{fontSize:11,color:'gray'}} >{this.props.author}</Text>
             <Text style={{fontSize:14,fontWeight:'bold',color:colors.primary}} >{this.props.prix}</Text>
-            <Text><Text  style={{color:'grey',fontWeight:'300',fontSize:11}}>
-                You save
-            </Text> {this.props.saving}
+            <Text  style={{
+                color:'gray',
+                fontWeight:'300',
+                fontSize:11,
+                textDecorationStyle:'solid',
+                textDecorationLine:'line-through'}}>
+            {this.props.saving}
             </Text>
             <Rating
                 type="custom"
@@ -56,17 +60,17 @@ export default class Item extends Component {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        marginBottom: 5,
+        marginBottom: 2,
         backgroundColor: "#fff",
     },
     image: {
-        width:90,
-        height:90,
+        width:100,
+        height:100,
         resizeMode:'contain'
     },
     content_container: {
         flex:1,
-        height:90,
+        height:100,
         paddingHorizontal:20,
         alignItems: 'flex-start',
     },
